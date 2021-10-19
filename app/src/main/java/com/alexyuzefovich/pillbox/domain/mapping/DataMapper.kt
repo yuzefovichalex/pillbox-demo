@@ -1,14 +1,14 @@
 package com.alexyuzefovich.pillbox.domain.mapping
 
-import com.alexyuzefovich.pillbox.data.db.model.PillData
+import com.alexyuzefovich.pillbox.data.db.model.MedicineData
 import com.alexyuzefovich.pillbox.ui.model.DosageMetric
-import com.alexyuzefovich.pillbox.ui.model.Pill
+import com.alexyuzefovich.pillbox.ui.model.Medicine
 import com.alexyuzefovich.pillbox.ui.model.QuantityMetric
 import com.alexyuzefovich.pillbox.ui.model.Type
 
-fun List<PillData>.toPills(): List<Pill> = map { it.toPill() }
+fun List<MedicineData>.toPills(): List<Medicine> = map { it.toPill() }
 
-fun PillData.toPill(): Pill = Pill(
+fun MedicineData.toPill(): Medicine = Medicine(
     id,
     name,
     notes,
@@ -19,7 +19,7 @@ fun PillData.toPill(): Pill = Pill(
 )
 
 
-fun Pill.toPillData(): PillData = PillData(
+fun Medicine.toPillData(): MedicineData = MedicineData(
     id,
     name,
     notes,

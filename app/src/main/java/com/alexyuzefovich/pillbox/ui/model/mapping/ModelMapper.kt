@@ -1,9 +1,9 @@
 package com.alexyuzefovich.pillbox.ui.model.mapping
 
 import com.alexyuzefovich.pillbox.ui.model.MedicineState
-import com.alexyuzefovich.pillbox.ui.model.Pill
+import com.alexyuzefovich.pillbox.ui.model.Medicine
 
-fun MedicineState.toPill(): Pill = Pill(
+fun MedicineState.toPill(): Medicine = Medicine(
     id,
     name,
     notes,

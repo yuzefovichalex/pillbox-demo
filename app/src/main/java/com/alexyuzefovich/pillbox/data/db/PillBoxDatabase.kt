@@ -5,15 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.alexyuzefovich.pillbox.data.db.dao.PillDao
-import com.alexyuzefovich.pillbox.data.db.model.PillData
+import com.alexyuzefovich.pillbox.data.db.dao.MedicineDao
+import com.alexyuzefovich.pillbox.data.db.model.MedicineData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [PillData::class], version = 1, exportSchema = false)
+@Database(entities = [MedicineData::class], version = 1, exportSchema = false)
 abstract class PillBoxDatabase : RoomDatabase() {
 
-    abstract fun pillDao(): PillDao
+    abstract fun pillDao(): MedicineDao
 
     private class Callback(
         private val scope: CoroutineScope
@@ -29,7 +29,7 @@ abstract class PillBoxDatabase : RoomDatabase() {
                     pillDao.deleteAll()
 
                     listOf(
-                        PillData(
+                        MedicineData(
                             0L,
                             "Ибупрофен",
                             "Обезболивающее",
@@ -38,7 +38,7 @@ abstract class PillBoxDatabase : RoomDatabase() {
                             1665705600000,
                             "TABLET"
                         ),
-                        PillData(
+                        MedicineData(
                             1L,
                             "Уролесан",
                             "При цистите и проблемах с мочевым",
@@ -47,7 +47,7 @@ abstract class PillBoxDatabase : RoomDatabase() {
                             1665705600000,
                             "CAPSULE"
                         ),
-                        PillData(
+                        MedicineData(
                             2L,
                             "Доксициклин",
                             "Антибиотик, назначали для мочевого",
@@ -56,7 +56,7 @@ abstract class PillBoxDatabase : RoomDatabase() {
                             1665705600000,
                             "TABLET"
                         ),
-                        PillData(
+                        MedicineData(
                             3L,
                             "Солидагорен",
                             null,

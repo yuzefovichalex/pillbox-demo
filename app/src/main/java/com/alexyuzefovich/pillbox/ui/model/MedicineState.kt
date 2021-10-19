@@ -8,22 +8,22 @@ class MedicineState private constructor() {
 
     companion object {
         val EMPTY: MedicineState
-            get() = fromPill(Pill.EMPTY)
+            get() = fromPill(Medicine.EMPTY)
 
-        fun fromPill(pill: Pill): MedicineState = MedicineState().apply {
-            id = pill.id
-            name = pill.name
-            notes = pill.notes.orEmpty()
-            quantity = pill.quantity
-            quantityMetric = pill.quantityMetric
-            dosage = pill.dosage ?: 0
-            dosageMetric = pill.dosageMetric
-            bestBeforeDate = pill.bestBeforeDate
-            type = pill.type
+        fun fromPill(medicine: Medicine): MedicineState = MedicineState().apply {
+            id = medicine.id
+            name = medicine.name
+            notes = medicine.notes.orEmpty()
+            quantity = medicine.quantity
+            quantityMetric = medicine.quantityMetric
+            dosage = medicine.dosage ?: 0
+            dosageMetric = medicine.dosageMetric
+            bestBeforeDate = medicine.bestBeforeDate
+            type = medicine.type
         }
     }
 
-    var id: Long = Pill.NO_ID
+    var id: Long = Medicine.NO_ID
     var name: String by mutableStateOf("")
     var notes: String by mutableStateOf("")
     var quantity: Int by mutableStateOf(0)

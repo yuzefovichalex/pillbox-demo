@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "pill_table")
-data class PillData(
+data class MedicineData(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: Long,

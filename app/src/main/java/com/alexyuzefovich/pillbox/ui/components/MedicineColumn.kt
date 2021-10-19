@@ -16,7 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.alexyuzefovich.pillbox.R
 import com.alexyuzefovich.pillbox.ui.components.basic.BottomSheetHeader
-import com.alexyuzefovich.pillbox.ui.model.Pill
+import com.alexyuzefovich.pillbox.ui.model.Medicine
 import com.alexyuzefovich.pillbox.ui.theme.LightGrey
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
@@ -24,10 +24,10 @@ import kotlinx.coroutines.flow.StateFlow
 
 @ExperimentalMaterialApi
 @Composable
-fun PillColumn(
-    pillFlow: StateFlow<List<Pill>>,
+fun MedicineColumn(
+    medicineFlow: StateFlow<List<Medicine>>,
     onMedicineCreate: () -> Unit,
-    onMedicineDetails: (Pill) -> Unit
+    onMedicineDetails: (Medicine) -> Unit
 ) {
     val systemInsets = rememberInsetsPaddingValues(insets = LocalWindowInsets.current.systemBars)
 
@@ -59,7 +59,7 @@ fun PillColumn(
             ) {
                 BottomSheetHeader(title = stringResource(id = R.string.your_pills))
 
-                val pills by pillFlow.collectAsState()
+                val pills by medicineFlow.collectAsState()
 
                 LazyColumn(
                     contentPadding = PaddingValues(
@@ -71,7 +71,7 @@ fun PillColumn(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     items(pills) { pill ->
-                        PillCard(pill, onMedicineDetails)
+                        MedicineCard(pill, onMedicineDetails)
                     }
                 }
             }

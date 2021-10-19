@@ -1,6 +1,6 @@
 package com.alexyuzefovich.pillbox.ui.model
 
-data class Pill(
+data class Medicine(
     val id: Long,
     val name: String,
     val notes: String?,
@@ -15,8 +15,8 @@ data class Pill(
     companion object {
         const val NO_ID = -1L
 
-        val EMPTY: Pill
-            get() = Pill(
+        val EMPTY: Medicine
+            get() = Medicine(
                 NO_ID,
                 "",
                 null,

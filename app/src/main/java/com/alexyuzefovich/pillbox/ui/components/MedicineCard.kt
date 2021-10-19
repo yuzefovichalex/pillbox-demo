@@ -23,21 +23,22 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.alexyuzefovich.pillbox.R
 import com.alexyuzefovich.pillbox.ui.components.basic.RippledCard
-import com.alexyuzefovich.pillbox.ui.model.Pill
+import com.alexyuzefovich.pillbox.ui.model.Medicine
+import com.alexyuzefovich.pillbox.ui.model.Type
 import com.alexyuzefovich.pillbox.ui.theme.*
 
 @ExperimentalMaterialApi
 @Composable
-fun PillCard(
-    pill: Pill,
-    onMedicineDetails: (Pill) -> Unit
+fun MedicineCard(
+    medicine: Medicine,
+    onMedicineDetails: (Medicine) -> Unit
 ) {
     RippledCard(
         modifier = Modifier.fillMaxWidth(),
         shape = Shapes.large,
         elevation = 0.dp,
         onClick = {
-            onMedicineDetails(pill)
+            onMedicineDetails(medicine)
         }
     ) {
         Column(
@@ -46,22 +47,22 @@ fun PillCard(
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                PillTypeIndicator(pill)
+                MedicineTypeIndicator(medicine.type)
 
                 Column(
                     modifier = Modifier.padding(start = 16.dp),
                     verticalArrangement = Arrangement.Center
                 ) {
                     Text(
-                        text = pill.name,
+                        text = medicine.name,
                         style = MaterialTheme.typography.h4
                     )
 
-                    PillPrimaryParametersRow(pill)
+                    MedicinePrimaryParametersRow(medicine)
                 }
             }
 
-            PillDescriptionRow(
+            MedicineDescriptionRow(
                 text = "До 14 октября 2022",
                 textStyle = MaterialTheme.typography.body1,
                 textColor = MaterialTheme.colors.onBackground,
@@ -70,9 +71,9 @@ fun PillCard(
                 modifier = Modifier.padding(top = 16.dp)
             )
 
-            if (!pill.notes.isNullOrBlank()) {
-                PillDescriptionRow(
-                    text = pill.notes,
+            if (!medicine.notes.isNullOrBlank()) {
+                MedicineDescriptionRow(
+                    text = medicine.notes,
                     textStyle = MaterialTheme.typography.body2,
                     textColor = SecondaryGrey,
                     icon = Icons.Rounded.Notes,
@@ -85,7 +86,7 @@ fun PillCard(
 }
 
 @Composable
-private fun PillTypeIndicator(pill: Pill) {
+private fun MedicineTypeIndicator(type: Type) {
     Box(
         modifier = Modifier
             .width(56.dp)
@@ -97,7 +98,7 @@ private fun PillTypeIndicator(pill: Pill) {
         contentAlignment = Alignment.Center
     ) {
         Image(
-            painter = painterResource(id = pill.type.imageResId),
+            painter = painterResource(id = type.imageResId),
             contentDescription = null,
             modifier = Modifier
                 .width(32.dp)
@@ -108,22 +109,22 @@ private fun PillTypeIndicator(pill: Pill) {
 }
 
 @Composable
-private fun PillPrimaryParametersRow(pill: Pill) {
+private fun MedicinePrimaryParametersRow(medicine: Medicine) {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = stringResource(
                 R.string.quantitative_element,
-                pill.quantity,
-                pill.quantityMetric.simpleName
+                medicine.quantity,
+                medicine.quantityMetric.simpleName
             ),
             modifier = Modifier.padding(end = 4.dp),
             style = MaterialTheme.typography.h6,
             color = MaterialTheme.colors.primaryVariant
         )
 
-        if (pill.dosage != null) {
+        if (medicine.dosage != null) {
             Image(
                 imageVector = Icons.Rounded.Circle,
                 contentDescription = null,
@@ -135,8 +136,8 @@ private fun PillPrimaryParametersRow(pill: Pill) {
             Text(
                 text = stringResource(
                     R.string.quantitative_element,
-                    pill.dosage,
-                    pill.dosageMetric.simpleName
+                    medicine.dosage,
+                    medicine.dosageMetric.simpleName
                 ),
                 modifier = Modifier.padding(start = 4.dp),
                 style = MaterialTheme.typography.h6,
@@ -147,7 +148,7 @@ private fun PillPrimaryParametersRow(pill: Pill) {
 }
 
 @Composable
-private fun PillDescriptionRow(
+private fun MedicineDescriptionRow(
     text: String,
     textStyle: TextStyle,
     textColor: Color,

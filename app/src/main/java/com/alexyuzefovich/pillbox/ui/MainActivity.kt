@@ -19,7 +19,7 @@ import androidx.core.view.WindowCompat
 import com.alexyuzefovich.pillbox.PillBoxApplication
 import com.alexyuzefovich.pillbox.R
 import com.alexyuzefovich.pillbox.ui.components.MedicineParametersSheet
-import com.alexyuzefovich.pillbox.ui.components.PillColumn
+import com.alexyuzefovich.pillbox.ui.components.MedicineColumn
 import com.alexyuzefovich.pillbox.ui.extensions.hide
 import com.alexyuzefovich.pillbox.ui.extensions.showFull
 import com.alexyuzefovich.pillbox.ui.model.BottomSheetVisibilityState
@@ -37,7 +37,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 class MainActivity : ComponentActivity() {
 
     private val mainViewModel: MainViewModel by viewModels {
-        MainViewModel.Factory((application as PillBoxApplication).pillRepository)
+        MainViewModel.Factory((application as PillBoxApplication).medicineRepository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,10 +110,10 @@ fun PillBoxContent(mainViewModel: MainViewModel) {
             )
 
             when (bottomSheetVisibilityState) {
-                is BottomSheetVisibilityState.Opened -> {
+                BottomSheetVisibilityState.OPENED -> {
                     modalBottomSheetState.showFull(coroutineScope)
                 }
-                is BottomSheetVisibilityState.Closed -> {
+                BottomSheetVisibilityState.CLOSED -> {
                     modalBottomSheetState.hide(coroutineScope)
                 }
             }
@@ -136,8 +136,8 @@ fun PillBoxContent(mainViewModel: MainViewModel) {
                 backLayerContent = { },
                 frontLayerShape = BottomSheetShape,
                 frontLayerContent = {
-                    PillColumn(
-                        pillFlow = mainViewModel.pills,
+                    MedicineColumn(
+                        medicineFlow = mainViewModel.pills,
                         onMedicineCreate = {
                             mainViewModel.startMedicineCreation()
                         },
