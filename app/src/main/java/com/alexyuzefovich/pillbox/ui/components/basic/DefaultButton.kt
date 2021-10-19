@@ -12,11 +12,13 @@ import androidx.compose.ui.unit.dp
 fun DefaultButton(
     text: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
 ) {
     Button(
         onClick = onClick,
         modifier = modifier,
+        enabled = enabled,
         contentPadding = PaddingValues(horizontal = 56.dp, vertical = 12.dp)
     ) {
         Text(

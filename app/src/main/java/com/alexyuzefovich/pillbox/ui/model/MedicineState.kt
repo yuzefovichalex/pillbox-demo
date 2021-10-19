@@ -24,6 +24,7 @@ class MedicineState private constructor() {
     }
 
     var id: Long = Medicine.NO_ID
+
     var name: String by mutableStateOf("")
     var notes: String by mutableStateOf("")
     var quantity: Int by mutableStateOf(0)
@@ -32,5 +33,14 @@ class MedicineState private constructor() {
     var dosageMetric: DosageMetric by mutableStateOf(DosageMetric.MILLIGRAMS)
     var bestBeforeDate: Long by mutableStateOf(0L)
     var type: Type by mutableStateOf(Type.TABLET)
+
+    val isNameValid: Boolean
+        get() = name.isNotBlank()
+
+    val isQuantityValid: Boolean
+        get() = quantity != 0
+
+    val isMedicineValid: Boolean
+        get() = isNameValid && isQuantityValid
 
 }

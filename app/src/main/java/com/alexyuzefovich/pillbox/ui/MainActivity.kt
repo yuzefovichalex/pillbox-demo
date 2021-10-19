@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,6 +33,7 @@ import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+@ExperimentalAnimationApi
 @ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 class MainActivity : ComponentActivity() {
@@ -79,6 +81,7 @@ class MainActivity : ComponentActivity() {
 
 }
 
+@ExperimentalAnimationApi
 @ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @Composable

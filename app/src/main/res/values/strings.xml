@@ -16,4 +16,7 @@
     <string name="notes_about_medicine">Some notes</string>
     <string name="notes_about_medicine_hint">Uses, dosages, etc.</string>
     <string name="save">Save</string>
+    <string name="invalid_medicine_warning_start">Note: To save Medicine, please fill out all</string>
+    <string name="invalid_medicine_warning_highlighted">\u0020required\u0020</string>
+    <string name="invalid_medicine_warning_end">fields highlighted in red</string>
 </resources>

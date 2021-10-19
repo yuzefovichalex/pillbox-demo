@@ -1,9 +1,13 @@
 package com.alexyuzefovich.pillbox.ui.components
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Notes
 import androidx.compose.material.icons.rounded.Title
@@ -12,18 +16,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.intl.Locale
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.alexyuzefovich.pillbox.R
 import com.alexyuzefovich.pillbox.ui.components.basic.BottomSheetHeader
 import com.alexyuzefovich.pillbox.ui.components.basic.DefaultButton
 import com.alexyuzefovich.pillbox.ui.components.basic.DefaultTextField
 import com.alexyuzefovich.pillbox.ui.components.basic.DropdownSelector
-import com.alexyuzefovich.pillbox.ui.model.*
+import com.alexyuzefovich.pillbox.ui.model.DosageMetric
+import com.alexyuzefovich.pillbox.ui.model.MedicineState
+import com.alexyuzefovich.pillbox.ui.model.QuantityMetric
+import com.alexyuzefovich.pillbox.ui.model.Type
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
 
+@ExperimentalAnimationApi
 @Composable
 fun MedicineParametersSheet(
     medicineState: MedicineState,
@@ -88,7 +99,8 @@ fun MedicineParametersSheet(
                     )
                 },
                 label = stringResource(id = R.string.name_of_medicine),
-                placeholder = stringResource(id = R.string.name_of_medicine_hint)
+                placeholder = stringResource(id = R.string.name_of_medicine_hint),
+                errorState = !medicineState.isNameValid
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -119,7 +131,8 @@ fun MedicineParametersSheet(
                     },
                     label = stringResource(id = R.string.quantity),
                     placeholder = stringResource(id = R.string.quantity_hint),
-                    singleLine = true
+                    singleLine = true,
+                    errorState = !medicineState.isQuantityValid
                 )
 
                 DefaultTextField(
@@ -166,7 +179,39 @@ fun MedicineParametersSheet(
                 placeholder = stringResource(id = R.string.notes_about_medicine_hint)
             )
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(16.dp))
+
+            AnimatedVisibility(
+                visible = !medicineState.isMedicineValid,
+                modifier = Modifier.padding(horizontal = 24.dp)
+            ) {
+                Text(
+                    text = buildAnnotatedString {
+                        withStyle(
+                            style = MaterialTheme.typography.body2.toSpanStyle()
+                        ) {
+                            append(stringResource(id = R.string.invalid_medicine_warning_start))
+                        }
+
+                        withStyle(
+                            style = MaterialTheme.typography.h6.copy(
+                                color = MaterialTheme.colors.error
+                            ).toSpanStyle()
+                        ) {
+                            append(stringResource(id = R.string.invalid_medicine_warning_highlighted))
+                        }
+
+                        withStyle(
+                            style = MaterialTheme.typography.body2.toSpanStyle()
+                        ) {
+                            append(stringResource(id = R.string.invalid_medicine_warning_end))
+                        }
+                    },
+                    textAlign = TextAlign.Center
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             Box(
                 modifier = Modifier
@@ -179,7 +224,8 @@ fun MedicineParametersSheet(
             ) {
                 DefaultButton(
                     text = stringResource(id = R.string.save),
-                    onClick = { onSave(medicineState) }
+                    onClick = { onSave(medicineState) },
+                    enabled = medicineState.isMedicineValid
                 )
             }
 

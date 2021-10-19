@@ -23,7 +23,8 @@ fun DefaultTextField(
     suffix: @Composable (() -> Unit)? = null,
     label: String? = null,
     placeholder: String? = null,
-    singleLine: Boolean = false
+    singleLine: Boolean = false,
+    errorState: Boolean = false
 ) {
     Row(
         modifier = modifier
@@ -38,10 +39,12 @@ fun DefaultTextField(
             modifier = Modifier.padding(start = 16.dp)
         ) {
             if (label != null) {
+                val labelColor = if (errorState) MaterialTheme.colors.error else MaterialTheme.colors.primary
+
                 Text(
                     text = label,
                     modifier = Modifier.padding(start = 8.dp, bottom = 4.dp),
-                    color = MaterialTheme.colors.primary,
+                    color = labelColor,
                     style = MaterialTheme.typography.h6
                 )
             }
