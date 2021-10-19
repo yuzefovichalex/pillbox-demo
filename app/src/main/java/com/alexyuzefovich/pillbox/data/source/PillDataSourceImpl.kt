@@ -10,4 +10,8 @@ class PillDataSourceImpl(
 
     override fun getAllPills(): Flow<List<PillData>> = pillDao.getAllPills()
 
+    override suspend fun savePill(pillData: PillData) {
+        pillDao.savePill(pillData)
+    }
+
 }

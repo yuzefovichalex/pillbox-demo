@@ -6,5 +6,6 @@ import kotlinx.coroutines.flow.Flow
 interface PillDataSource {
 
     fun getAllPills(): Flow<List<PillData>>
+    suspend fun savePill(pillData: PillData)
 
 }

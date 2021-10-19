@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">PillBox</string>
+    <string name="your_pills">Your pills</string>
+    <string name="new_pill">NEW PILL</string>
     <string name="quantitative_element">%1$d %2$s</string>
+    <string name="medicine_parameters">Medicine parameters</string>
+    <string name="type_of_medicine">Type of medicine</string>
+    <string name="name_of_medicine">Name of medicine</string>
+    <string name="name_of_medicine_hint">Ascorbic acid</string>
+    <string name="quantity">Quantity</string>
+    <string name="quantity_hint">0</string>
+    <string name="dosage">Dosage</string>
+    <string name="dosage_hint">0</string>
+    <string name="expand_more">Expand more</string>
+    <string name="selected">Selected</string>
+    <string name="notes_about_medicine">Some notes</string>
+    <string name="notes_about_medicine_hint">Uses, dosages, etc.</string>
+    <string name="save">Save</string>
 </resources>

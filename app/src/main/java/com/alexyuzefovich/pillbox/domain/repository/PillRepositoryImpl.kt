@@ -1,6 +1,7 @@
 package com.alexyuzefovich.pillbox.domain.repository
 
 import com.alexyuzefovich.pillbox.data.source.PillDataSource
+import com.alexyuzefovich.pillbox.domain.mapping.toPillData
 import com.alexyuzefovich.pillbox.domain.mapping.toPills
 import com.alexyuzefovich.pillbox.ui.model.Pill
 import kotlinx.coroutines.flow.Flow
@@ -11,5 +12,9 @@ class PillRepositoryImpl(
 ) : PillRepository {
 
     override fun getAllPills(): Flow<List<Pill>> = pillDataSource.getAllPills().map { it.toPills() }
+
+    override suspend fun savePill(pill: Pill) {
+        pillDataSource.savePill(pill.toPillData())
+    }
 
 }

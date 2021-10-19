@@ -26,7 +26,7 @@ data class PillData(
     val dosage: Int?,
 
     @ColumnInfo(name = "dosage_metric")
-    val dosageMetric: String?,
+    val dosageMetric: String,
 
     @ColumnInfo(name = "best_before_date")
     val bestBeforeDate: Long,

@@ -36,16 +36,16 @@ abstract class PillBoxDatabase : RoomDatabase() {
                             50, "pcs",
                             200, "mg",
                             1665705600000,
-                            "tablet"
+                            "TABLET"
                         ),
                         PillData(
                             1L,
                             "Уролесан",
                             "При цистите и проблемах с мочевым",
                             40, "pcs",
-                            null, null,
+                            null, "mg",
                             1665705600000,
-                            "capsule"
+                            "CAPSULE"
                         ),
                         PillData(
                             2L,
@@ -54,19 +54,19 @@ abstract class PillBoxDatabase : RoomDatabase() {
                             10, "pcs",
                             100, "mg",
                             1665705600000,
-                            "tablet"
+                            "TABLET"
                         ),
                         PillData(
                             3L,
                             "Солидагорен",
                             null,
                             50, "ml",
-                            null, null,
+                            null, "mg",
                             1665705600000,
-                            "tablet"
+                            "TABLET"
                         )
                     ).forEach {
-                        pillDao.addPill(it)
+                        pillDao.savePill(it)
                     }
                 }
             }

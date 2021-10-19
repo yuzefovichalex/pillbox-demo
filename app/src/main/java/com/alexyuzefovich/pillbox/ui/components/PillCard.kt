@@ -4,7 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -22,17 +22,23 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.alexyuzefovich.pillbox.R
+import com.alexyuzefovich.pillbox.ui.components.basic.RippledCard
 import com.alexyuzefovich.pillbox.ui.model.Pill
-import com.alexyuzefovich.pillbox.ui.theme.LightGrey
-import com.alexyuzefovich.pillbox.ui.theme.SecondaryGrey
-import com.alexyuzefovich.pillbox.ui.theme.Shapes
+import com.alexyuzefovich.pillbox.ui.theme.*
 
+@ExperimentalMaterialApi
 @Composable
-fun PillCard(pill: Pill) {
-    Card(
+fun PillCard(
+    pill: Pill,
+    onMedicineDetails: (Pill) -> Unit
+) {
+    RippledCard(
         modifier = Modifier.fillMaxWidth(),
         shape = Shapes.large,
-        elevation = 8.dp
+        elevation = 0.dp,
+        onClick = {
+            onMedicineDetails(pill)
+        }
     ) {
         Column(
             modifier = Modifier.padding(16.dp)
@@ -48,7 +54,7 @@ fun PillCard(pill: Pill) {
                 ) {
                     Text(
                         text = pill.name,
-                        style = MaterialTheme.typography.h5
+                        style = MaterialTheme.typography.h4
                     )
 
                     PillPrimaryParametersRow(pill)
@@ -64,7 +70,7 @@ fun PillCard(pill: Pill) {
                 modifier = Modifier.padding(top = 16.dp)
             )
 
-            if (pill.notes != null) {
+            if (!pill.notes.isNullOrBlank()) {
                 PillDescriptionRow(
                     text = pill.notes,
                     textStyle = MaterialTheme.typography.body2,
@@ -85,7 +91,7 @@ private fun PillTypeIndicator(pill: Pill) {
             .width(56.dp)
             .height(56.dp)
             .background(
-                color = MaterialTheme.colors.primary,
+                color = Green200,
                 shape = Shapes.large
             ),
         contentAlignment = Alignment.Center
@@ -96,7 +102,7 @@ private fun PillTypeIndicator(pill: Pill) {
             modifier = Modifier
                 .width(32.dp)
                 .height(32.dp),
-            colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryVariant)
+            colorFilter = ColorFilter.tint(Green700)
         )
     }
 }
@@ -107,13 +113,17 @@ private fun PillPrimaryParametersRow(pill: Pill) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = stringResource(R.string.quantitative_element, pill.quantity, pill.quantityMetric),
+            text = stringResource(
+                R.string.quantitative_element,
+                pill.quantity,
+                pill.quantityMetric.simpleName
+            ),
             modifier = Modifier.padding(end = 4.dp),
             style = MaterialTheme.typography.h6,
             color = MaterialTheme.colors.primaryVariant
         )
 
-        if (pill.dosage != null && pill.dosageMetric != null) {
+        if (pill.dosage != null) {
             Image(
                 imageVector = Icons.Rounded.Circle,
                 contentDescription = null,
@@ -126,7 +136,7 @@ private fun PillPrimaryParametersRow(pill: Pill) {
                 text = stringResource(
                     R.string.quantitative_element,
                     pill.dosage,
-                    pill.dosageMetric
+                    pill.dosageMetric.simpleName
                 ),
                 modifier = Modifier.padding(start = 4.dp),
                 style = MaterialTheme.typography.h6,

@@ -1,7 +1,10 @@
 package com.alexyuzefovich.pillbox.domain.mapping
 
 import com.alexyuzefovich.pillbox.data.db.model.PillData
+import com.alexyuzefovich.pillbox.ui.model.DosageMetric
 import com.alexyuzefovich.pillbox.ui.model.Pill
+import com.alexyuzefovich.pillbox.ui.model.QuantityMetric
+import com.alexyuzefovich.pillbox.ui.model.Type
 
 fun List<PillData>.toPills(): List<Pill> = map { it.toPill() }
 
@@ -9,15 +12,19 @@ fun PillData.toPill(): Pill = Pill(
     id,
     name,
     notes,
-    quantity, quantityMetric,
-    dosage, dosageMetric,
+    quantity, QuantityMetric.getBySimpleName(quantityMetric),
+    dosage, DosageMetric.getBySimpleName(dosageMetric),
     bestBeforeDate,
-    type.toPillType()
+    Type.getBySimpleName(type)
 )
 
-fun String.toPillType(): Pill.Type =
-    when (this) {
-        "tablet" -> Pill.Type.TABLET
-        "capsule" -> Pill.Type.CAPSULE
-        else -> Pill.Type.TABLET
-    }
+
+fun Pill.toPillData(): PillData = PillData(
+    id,
+    name,
+    notes,
+    quantity, quantityMetric.simpleName,
+    dosage, dosageMetric.simpleName,
+    bestBeforeDate,
+    type.toString()
+)

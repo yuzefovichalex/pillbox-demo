@@ -13,8 +13,8 @@ interface PillDao {
     @Query("SELECT * FROM pill_table ORDER BY name ASC")
     fun getAllPills(): Flow<List<PillData>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addPill(pillData: PillData)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun savePill(pillData: PillData)
 
     @Query("DELETE FROM pill_table")
     suspend fun deleteAll()
