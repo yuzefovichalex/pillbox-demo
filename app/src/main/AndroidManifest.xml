@@ -3,6 +3,7 @@
     package="com.alexyuzefovich.pillbox">
 
     <application
+        android:name=".PillBoxApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,10 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PillBox">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.PillBox.NoActionBar">
+            android:theme="@style/Theme.PillBox.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
