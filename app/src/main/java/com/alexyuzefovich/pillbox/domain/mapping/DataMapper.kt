@@ -26,5 +26,5 @@ fun Medicine.toPillData(): MedicineData = MedicineData(
     quantity, quantityMetric.simpleName,
     dosage, dosageMetric.simpleName,
     bestBeforeDate,
-    type.toString()
+    type.simpleName
 )

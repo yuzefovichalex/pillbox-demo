@@ -8,7 +8,7 @@ fun MedicineState.toPill(): Medicine = Medicine(
     name,
     notes,
     quantity, quantityMetric,
-    dosage, dosageMetric,
+    dosage.takeIf { it > 0 }, dosageMetric,
     bestBeforeDate,
     type
 )

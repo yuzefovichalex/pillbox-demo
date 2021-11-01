@@ -12,7 +12,7 @@ import kotlinx.coroutines.SupervisorJob
 class PillBoxApplication : Application() {
 
     private val pillBoxDatabase: PillBoxDatabase by lazy { PillBoxDatabase.getDatabase(this, CoroutineScope(SupervisorJob())) }
-    private val medicineDataSource: MedicineDataSource by lazy { MedicineDataSourceImpl(pillBoxDatabase.pillDao()) }
+    private val medicineDataSource: MedicineDataSource by lazy { MedicineDataSourceImpl(pillBoxDatabase.medicineDao()) }
     val medicineRepository: MedicineRepository by lazy { MedicineRepositoryImpl(medicineDataSource) }
 
 }

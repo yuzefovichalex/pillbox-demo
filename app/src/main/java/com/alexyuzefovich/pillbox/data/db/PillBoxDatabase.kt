@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 @Database(entities = [MedicineData::class], version = 1, exportSchema = false)
 abstract class PillBoxDatabase : RoomDatabase() {
 
-    abstract fun pillDao(): MedicineDao
+    abstract fun medicineDao(): MedicineDao
 
     private class Callback(
         private val scope: CoroutineScope
@@ -23,50 +23,50 @@ abstract class PillBoxDatabase : RoomDatabase() {
             super.onCreate(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    val pillDao = database.pillDao()
+                    val medicineDao = database.medicineDao()
 
                     // Delete all content here.
-                    pillDao.deleteAll()
+                    medicineDao.deleteAll()
 
                     listOf(
                         MedicineData(
-                            0L,
-                            "Ибупрофен",
-                            "Обезболивающее",
-                            50, "pcs",
-                            200, "mg",
-                            1665705600000,
-                            "TABLET"
-                        ),
-                        MedicineData(
                             1L,
-                            "Уролесан",
-                            "При цистите и проблемах с мочевым",
-                            40, "pcs",
-                            null, "mg",
+                            "Aspirin",
+                            "Fever in infectious and inflammatory diseases; pain syndrome of mild to moderate intensity of various genesis (including neuralgia, myalgia, headache)",
+                            100, "pcs",
+                            500, "mg",
                             1665705600000,
-                            "CAPSULE"
+                            "tablet"
                         ),
                         MedicineData(
                             2L,
-                            "Доксициклин",
-                            "Антибиотик, назначали для мочевого",
-                            10, "pcs",
-                            100, "mg",
+                            "Amoxicillin",
+                            "For use as monotherapy and in combination with clavulanic acid: infectious and inflammatory diseases caused by susceptible microorganisms",
+                            20, "pcs",
+                            500, "mg",
                             1665705600000,
-                            "TABLET"
+                            "capsule"
                         ),
                         MedicineData(
                             3L,
-                            "Солидагорен",
-                            null,
-                            50, "ml",
-                            null, "mg",
+                            "Multivitamins",
+                            "It contains an essential vitamin complex to support effective metabolism and healthy functioning of the immune system.",
+                            30, "pcs",
+                            2, "g",
                             1665705600000,
-                            "TABLET"
+                            "tablet"
+                        ),
+                        MedicineData(
+                            4L,
+                            "Azithromycin",
+                            "",
+                            3, "pcs",
+                            500, "mg",
+                            1665705600000,
+                            "tablet"
                         )
                     ).forEach {
-                        pillDao.savePill(it)
+                        medicineDao.saveMedicine(it)
                     }
                 }
             }

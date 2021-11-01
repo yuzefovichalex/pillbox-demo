@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PillBox</string>
     <string name="your_pills">Your pills</string>
-    <string name="new_pill">NEW PILL</string>
+    <string name="new_pill">New pill</string>
     <string name="quantitative_element">%1$d %2$s</string>
     <string name="medicine_parameters">Medicine parameters</string>
     <string name="type_of_medicine">Type of medicine</string>

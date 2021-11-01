@@ -21,8 +21,8 @@ class MainViewModel(
     private val medicineRepository: MedicineRepository
 ) : ViewModel() {
 
-    private val _pills: MutableStateFlow<List<Medicine>> = MutableStateFlow(emptyList())
-    val pills: StateFlow<List<Medicine>> = _pills
+    private val _medicines: MutableStateFlow<List<Medicine>> = MutableStateFlow(emptyList())
+    val medicines: StateFlow<List<Medicine>> = _medicines
 
     val bottomSheetVisibilityState: MutableState<BottomSheetVisibilityState> =
         mutableStateOf(BottomSheetVisibilityState.CLOSED)
@@ -34,8 +34,8 @@ class MainViewModel(
 
     fun loadPills() {
         viewModelScope.launch {
-            medicineRepository.getAllPills().collect {
-                _pills.value = it
+            medicineRepository.getAllMedicines().collect {
+                _medicines.value = it
             }
         }
     }
@@ -63,7 +63,7 @@ class MainViewModel(
         }
 
         viewModelScope.launch {
-            medicineRepository.savePill(readyToSavePill)
+            medicineRepository.saveMedicine(readyToSavePill)
         }
     }
 

@@ -11,10 +11,10 @@ class MedicineRepositoryImpl(
     private val medicineDataSource: MedicineDataSource
 ) : MedicineRepository {
 
-    override fun getAllPills(): Flow<List<Medicine>> = medicineDataSource.getAllPills().map { it.toPills() }
+    override fun getAllMedicines(): Flow<List<Medicine>> = medicineDataSource.getAllMedicines().map { it.toPills() }
 
-    override suspend fun savePill(medicine: Medicine) {
-        medicineDataSource.savePill(medicine.toPillData())
+    override suspend fun saveMedicine(medicine: Medicine) {
+        medicineDataSource.saveMedicine(medicine.toPillData())
     }
 
 }

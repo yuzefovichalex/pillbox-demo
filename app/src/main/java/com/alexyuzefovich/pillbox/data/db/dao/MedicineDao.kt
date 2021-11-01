@@ -10,13 +10,13 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MedicineDao {
 
-    @Query("SELECT * FROM pill_table ORDER BY name ASC")
-    fun getAllPills(): Flow<List<MedicineData>>
+    @Query("SELECT * FROM medicine_table ORDER BY name ASC")
+    fun getAllMedicines(): Flow<List<MedicineData>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun savePill(medicineData: MedicineData)
+    suspend fun saveMedicine(medicineData: MedicineData)
 
-    @Query("DELETE FROM pill_table")
+    @Query("DELETE FROM medicine_table")
     suspend fun deleteAll()
 
 }

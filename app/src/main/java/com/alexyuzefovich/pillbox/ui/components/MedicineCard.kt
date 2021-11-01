@@ -63,7 +63,7 @@ fun MedicineCard(
             }
 
             MedicineDescriptionRow(
-                text = "До 14 октября 2022",
+                text = "January 1, 2022",
                 textStyle = MaterialTheme.typography.body1,
                 textColor = MaterialTheme.colors.onBackground,
                 icon = Icons.Rounded.Today,

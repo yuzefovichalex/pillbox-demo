@@ -8,10 +8,10 @@ class MedicineDataSourceImpl(
     private val medicineDao: MedicineDao
 ) : MedicineDataSource {
 
-    override fun getAllPills(): Flow<List<MedicineData>> = medicineDao.getAllPills()
+    override fun getAllMedicines(): Flow<List<MedicineData>> = medicineDao.getAllMedicines()
 
-    override suspend fun savePill(medicineData: MedicineData) {
-        medicineDao.savePill(medicineData)
+    override suspend fun saveMedicine(medicineData: MedicineData) {
+        medicineDao.saveMedicine(medicineData)
     }
 
 }

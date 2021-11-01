@@ -36,7 +36,7 @@ fun MedicineColumn(
             ExtendedFloatingActionButton(
                 text = {
                     Text(
-                        text = stringResource(id = R.string.new_pill),
+                        text = stringResource(id = R.string.new_pill).uppercase(),
                         style = MaterialTheme.typography.button
                     )
                 },

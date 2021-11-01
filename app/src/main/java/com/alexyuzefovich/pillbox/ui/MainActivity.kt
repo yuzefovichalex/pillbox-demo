@@ -5,10 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -140,7 +137,7 @@ fun PillBoxContent(mainViewModel: MainViewModel) {
                 frontLayerShape = BottomSheetShape,
                 frontLayerContent = {
                     MedicineColumn(
-                        medicineFlow = mainViewModel.pills,
+                        medicineFlow = mainViewModel.medicines,
                         onMedicineCreate = {
                             mainViewModel.startMedicineCreation()
                         },
